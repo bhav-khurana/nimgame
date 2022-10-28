@@ -2,6 +2,7 @@
     <head>
         <title>Ttile</title>
 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script type="text/javascript">
 
             function check_game_over() {
@@ -159,7 +160,7 @@
                  new_img = document.createElement("img");
                  new_img.setAttribute("src", "new_marble.png");
                  new_img.setAttribute("height", "60px");
-                 new_img.setAttribute("width", "95px");
+                 new_img.setAttribute("width", "100px");
                  new_img.style.transition = "all 2s";
                  marbles1.appendChild(new_img)
              }
@@ -169,7 +170,7 @@
                  new_img = document.createElement("img");
                  new_img.setAttribute("src", "new_marble.png");
                  new_img.setAttribute("height", "60px");
-                 new_img.setAttribute("width", "95px");
+                 new_img.setAttribute("width", "100px");
                  new_img.style.transition = "all 2s";
                  marbles2.appendChild(new_img)
              }
@@ -182,7 +183,7 @@
                  new_img = document.createElement("img");
                  new_img.setAttribute("src", "new_marble.png");
                  new_img.setAttribute("height", "60px");
-                 new_img.setAttribute("width", "95px");
+                 new_img.setAttribute("width", "100px");
                  new_img.style.transition = "all 2s";
                  marbles3.appendChild(new_img)
              }
@@ -192,28 +193,29 @@
          }
         </script>
     </head>
-    <body onload="reset()" style="margin: 20px; background-color: wheat;">
-        <h1>Title</h1>
+    <body onload="reset()" style="margin: 20px; background-color: black;">
+        <h1 style="margin-bottom: 25px; font-size: 7vh; font-family: 'Times New Roman', Times, serif; color: white;">Title</h1>
         <div style="width:100%">
-            <div style="margin-bottom: 25px">Take turns with the computer. On each turn, you may remove any number of marbles from any pile. Whoever takes the last marble loses, so choose carefully!</div>
-            <div id="marbles1" style="min-height:100px">
+            <div style="text-align: center; margin-bottom: 25px; letter-spacing: 1.1; font-size: 3vh; font-family: 'Times New Roman', Times, serif; color: white;">Take turns with the computer. On each turn, you may remove any number of marbles from any pile. Whoever takes the last marble loses, so choose carefully!</div>
+            <br /><br />
+            <div id="marbles1" style="margin-left: 100px; min-height:100px">
             </div>
-            <div id="marbles2" style="min-height:100px">
+            <div id="marbles2" style="margin-left: 100px; min-height:100px">
             </div>
-            <div id="marbles3" style="min-height:100px">
+            <div id="marbles3" style="margin-left: 100px; min-height:100px">
             </div>
             <div id="moves" style="margin-top: 30px; text-align:center">
                 Choose your move:
-                <br />
+                <br /> <br />
                 <!-- <form> -->
-                      <input type="text" id="pileno" placeholder="Choose pile"/>
-                      <input type="text" id="noofmarbles" placeholder="Choose number of marbles"/>
+                      <input type="text" style="width:200px; height: 40px; border-radius: 5px; padding: 8px;" id="pileno" placeholder="Choose pile"/>
+                      <input type="text" style="width:200px; height: 40px; border-radius: 5px; padding: 8px;"  id="noofmarbles" placeholder="Choose number of marbles"/>
                       <br /> <br />
-                      <button id="makemove" onclick="make_move()">Make Move</button>
+                      <button id="makemove" onclick="make_move()" class="btn btn-primary">Make Move</button>
                 <!-- </form> -->
             </div>
             <div style="margin-top: 10px; text-align:center">
-                <button type="button" id="reset" onclick=location.reload()>Reset</button>
+                  <button type="button" id="reset" onclick=location.reload() class="btn btn-primary">Reset</button>
             </div>
             <div id="msg_box" style="font-weight: bold; text-align: center; margin-top: 30px">&nbsp;</div>
         </div>
