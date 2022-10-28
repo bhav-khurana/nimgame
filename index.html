@@ -47,21 +47,21 @@
                   }
                   else {
                         if (marbles1.children.length - 1 > 0) {
-                              var no_to_be_removed = Math.floor(1 + Math.random() * (marbles1.children.length - 1 - 1))
+                              var no_to_be_removed = 1
                               for (let i = 0; i < no_to_be_removed; i++) {
                                     var last_marble = marbles1.children[marbles1.children.length - 1];
                                     marbles1.removeChild(last_marble);
                               }
                         }
                         else if (marbles2.children.length - 1 > 0) {
-                              var no_to_be_removed = Math.floor(1 + Math.random() * (marbles2.children.length - 1 - 1))
+                              var no_to_be_removed = 1
                               for (let i = 0; i < no_to_be_removed; i++) {
                                     var last_marble = marbles2.children[marbles2.children.length - 1];
                                     marbles2.removeChild(last_marble);
                               }
                         }
                         else if (marbles3.children.length - 1 > 0) {
-                              var no_to_be_removed = Math.floor(1 + Math.random() * (marbles3.children.length - 1 - 1))
+                              var no_to_be_removed = 1
                               for (let i = 0; i < no_to_be_removed; i++) {
                                     var last_marble = marbles3.children[marbles3.children.length - 1];
                                     marbles3.removeChild(last_marble);
@@ -156,7 +156,7 @@
 
             function reset() {
                   marbles1 = document.getElementById('marbles1');
-                  var a = Math.floor(2 + Math.random() * (9 - 2));
+                  var a = Math.floor(2 + Math.random() * (10 - 2));
                   while (marbles1.children.length - 1 < a) {
                         new_img = document.createElement("img");
                         new_img.setAttribute("src", "new_marble.png");
@@ -165,7 +165,7 @@
                         new_img.style.transition = "all 2s";
                         marbles1.appendChild(new_img)
                   }
-                  var b = Math.floor(2 + Math.random() * (9 - 2));
+                  var b = Math.floor(2 + Math.random() * (10 - 2));
                   marbles2 = document.getElementById('marbles2');
                   while (marbles2.children.length - 1 < b) {
                         new_img = document.createElement("img");
@@ -175,7 +175,7 @@
                         new_img.style.transition = "all 2s";
                         marbles2.appendChild(new_img)
                   }
-                  var c = Math.floor(2 + Math.random() * (9 - 2));
+                  var c = Math.floor(2 + Math.random() * (10 - 2));
                   marbles3 = document.getElementById('marbles3');
                   while (marbles3.children.length - 1 < c) {
                         new_img = document.createElement("img");
@@ -195,7 +195,7 @@
       <div style="width:100%">
             <div
                   style="margin-bottom: 25px;font-size: 3.2vh; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color: white;">
-                  Take turns with the computer in the following game! In a move, you may pick a non empty pile of marbles and remove any number of them from it. The player who can't make a move loses. The winner gets a reward!</div>
+                  Take turns with the computer in the following game! There are three piles of marbles. In a move, the player must pick a non-empty pile and remove some (non-zero) marbles from it. The player who can't make a move loses. Can you beat the computer?</div>
             <br /><br />
             <div id="marbles1" style="margin-left: 100px; min-height:80px"><img src="one.jpg" alt="one" height="65px" width="65px" />
             </div>
