@@ -1,223 +1,226 @@
 <html>
-    <head>
-        <title>Ttile</title>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script type="text/javascript">
+<head>
+      <title>Ttile</title>
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script type="text/javascript">
 
             function check_game_over() {
-                  var l1 = marbles1.children.length;
-                  var l2 = marbles2.children.length;
-                  var l3 = marbles3.children.length;
+                  var l1 = marbles1.children.length - 1;
+                  var l2 = marbles2.children.length - 1;
+                  var l3 = marbles3.children.length - 1;
                   if (!l1 && !l2 && !l3) {
                         return true;
                   }
                   return false;
             }
-  
-         function comp_move() {
-                // algo
-                var nim_sum = 0;
-                var l1 = marbles1.children.length;
-                var l2 = marbles2.children.length;
-                var l3 = marbles3.children.length;
-                nim_sum = l1^l2^l3;
-                // The player having the current turn is on a winning
-                // position. So he/she/it play optimally and tries to make
-                // Nim-Sum as 0
-                if (nim_sum != 0){
-                    if ((marbles1.children.length ^ nim_sum) < marbles1.children.length){
-                        var no_to_be_removed=marbles1.children.length-(marbles1.children.length^nim_sum)
-                        for (let i = 0; i < no_to_be_removed; i++) {
-                        var last_marble = marbles1.children[marbles1.children.length-1];
-                        marbles1.removeChild(last_marble);
+
+            function comp_move() {
+                  var nim_sum = 0;
+                  var l1 = marbles1.children.length - 1;
+                  var l2 = marbles2.children.length - 1;
+                  var l3 = marbles3.children.length - 1;
+                  nim_sum = l1 ^ l2 ^ l3;
+                  if (nim_sum != 0) {
+                        if ((marbles1.children.length - 1 ^ nim_sum) < marbles1.children.length - 1) {
+                              var no_to_be_removed = marbles1.children.length - 1 - (marbles1.children.length - 1 ^ nim_sum)
+                              for (let i = 0; i < no_to_be_removed; i++) {
+                                    var last_marble = marbles1.children[marbles1.children.length - 1];
+                                    marbles1.removeChild(last_marble);
+                              }
                         }
-                    }
-                    else if ((marbles2.children.length ^ nim_sum) < marbles2.children.length){
-                        var no_to_be_removed=marbles2.children.length-(marbles2.children.length^nim_sum)
-                        for (let i = 0; i < no_to_be_removed; i++) {
-                        var last_marble = marbles2.children[marbles2.children.length-1];
-                        marbles2.removeChild(last_marble);
+                        else if ((marbles2.children.length - 1 ^ nim_sum) < marbles2.children.length - 1) {
+                              var no_to_be_removed = marbles2.children.length - 1 - (marbles2.children.length - 1 ^ nim_sum)
+                              for (let i = 0; i < no_to_be_removed; i++) {
+                                    var last_marble = marbles2.children[marbles2.children.length - 1];
+                                    marbles2.removeChild(last_marble);
+                              }
                         }
-                    }
-                    else if ((marbles3.children.length ^ nim_sum) < marbles3.children.length){
-                        var no_to_be_removed=marbles3.children.length-(marbles3.children.length^nim_sum)
-                        for (let i = 0; i < no_to_be_removed; i++) {
-                        var last_marble = marbles3.children[marbles3.children.length-1];
-                        marbles3.removeChild(last_marble);
+                        else if ((marbles3.children.length - 1 ^ nim_sum) < marbles3.children.length - 1) {
+                              var no_to_be_removed = marbles3.children.length - 1 - (marbles3.children.length - 1 ^ nim_sum)
+                              for (let i = 0; i < no_to_be_removed; i++) {
+                                    var last_marble = marbles3.children[marbles3.children.length - 1];
+                                    marbles3.removeChild(last_marble);
+                              }
                         }
-                    }
-                }
-                else
-                {
-                    // Taking random number of stones out
-                    if(marbles1.children.length>0){
-                        var no_to_be_removed=Math.floor(1 + Math.random() * (marbles1.children.length - 1))
-                        for (let i = 0; i < no_to_be_removed; i++) {
-                        var last_marble = marbles1.children[marbles1.children.length-1];
-                        marbles1.removeChild(last_marble);
-                        }
-                    }
-                    else if(marbles2.children.length>0){
-                        var no_to_be_removed=Math.floor(1 + Math.random() * (marbles2.children.length - 1))
-                        for (let i = 0; i < no_to_be_removed; i++) {
-                        var last_marble = marbles2.children[marbles2.children.length-1];
-                        marbles2.removeChild(last_marble);
-                        }
-                    }
-                    else if(marbles3.children.length>0){
-                        var no_to_be_removed=Math.floor(1 + Math.random() * (marbles3.children.length - 1))
-                        for (let i = 0; i < no_to_be_removed; i++) {
-                        var last_marble = marbles3.children[marbles3.children.length-1];
-                        marbles3.removeChild(last_marble);
-                        }
-                    }
-                }
-                setTimeout(() => {
-                  if (check_game_over()) {
-                        alert("You lose!  :(");
-                        location.reload();
-                 }
-                }, 500);
-                
-         }
-  
-         function make_move() {
-          var no_to_be_removed = parseInt(document.getElementById('noofmarbles').value);
-          var pile_no = parseInt(document.getElementById('pileno').value);
-            if (pile_no == 1) {
-                  if (no_to_be_removed > marbles1.children.length || no_to_be_removed <= 0) {
-                        alert("Invalid Input");
-                        return;
                   }
-                  for (i = 0; i < no_to_be_removed; i++) {
-                     var last_marble = marbles1.children[marbles1.children.length-1];
-                     marbles1.removeChild(last_marble);
-                 }
-                 if (check_game_over()) {
-                  alert("You win! Please collect your chocolate from the seniors :)");
-                  location.reload();
-                 }
-                 document.getElementById("makemove").disabled = true;
-                 document.getElementById("makemove").innerHTML = "Waiting...";
-                 setTimeout(() => {
-                  comp_move();
-                  document.getElementById("makemove").disabled = false;
-                  document.getElementById("makemove").innerHTML = "Make Move";
-                 }, 2000);
-          }
-          else if (pile_no == 2) {
-                  if (no_to_be_removed > marbles2.children.length || no_to_be_removed <= 0) {
+                  else {
+                        if (marbles1.children.length - 1 > 0) {
+                              var no_to_be_removed = Math.floor(1 + Math.random() * (marbles1.children.length - 1 - 1))
+                              for (let i = 0; i < no_to_be_removed; i++) {
+                                    var last_marble = marbles1.children[marbles1.children.length - 1];
+                                    marbles1.removeChild(last_marble);
+                              }
+                        }
+                        else if (marbles2.children.length - 1 > 0) {
+                              var no_to_be_removed = Math.floor(1 + Math.random() * (marbles2.children.length - 1 - 1))
+                              for (let i = 0; i < no_to_be_removed; i++) {
+                                    var last_marble = marbles2.children[marbles2.children.length - 1];
+                                    marbles2.removeChild(last_marble);
+                              }
+                        }
+                        else if (marbles3.children.length - 1 > 0) {
+                              var no_to_be_removed = Math.floor(1 + Math.random() * (marbles3.children.length - 1 - 1))
+                              for (let i = 0; i < no_to_be_removed; i++) {
+                                    var last_marble = marbles3.children[marbles3.children.length - 1];
+                                    marbles3.removeChild(last_marble);
+                              }
+                        }
+                  }
+                  setTimeout(() => {
+                        if (check_game_over()) {
+                              alert("You lose!  :(");
+                              location.reload();
+                        }
+                  }, 500);
+
+            }
+
+            function make_move() {
+                  var no_to_be_removed = parseInt(document.getElementById('noofmarbles').value);
+                  var pile_no = parseInt(document.getElementById('pileno').value);
+                  if (pile_no == 1) {
+                        if (no_to_be_removed > marbles1.children.length - 1 || no_to_be_removed <= 0) {
                               alert("Invalid Input");
                               return;
+                        }
+                        for (i = 0; i < no_to_be_removed; i++) {
+                              var last_marble = marbles1.children[marbles1.children.length - 1];
+                              marbles1.removeChild(last_marble);
+                        }
+                        setTimeout(() => {
+                              if (check_game_over()) {
+                              alert("You win! Please collect your chocolate from the seniors :)");
+                              location.reload();
+                              }
+                        }, 500);
+                        document.getElementById("makemove").disabled = true;
+                        document.getElementById("makemove").innerHTML = "Waiting...";
+                        setTimeout(() => {
+                              comp_move();
+                              document.getElementById("makemove").disabled = false;
+                              document.getElementById("makemove").innerHTML = "Make Move";
+                        }, 1300);
                   }
-                for (i = 0; i < no_to_be_removed; i++) {
-                     var last_marble = marbles2.children[marbles2.children.length-1];
-                     marbles2.removeChild(last_marble);
-                 }
-                 if (check_game_over()) {
-                  alert("You win! Please collect your chocolate from the seniors :)");
-                  location.reload();
-                 }
-                 document.getElementById("makemove").disabled = true;
-                 document.getElementById("makemove").innerHTML = "Waiting...";
-                 setTimeout(() => {
-                  comp_move();
-                  document.getElementById("makemove").disabled = false;
-                  document.getElementById("makemove").innerHTML = "Make Move";
-                 }, 2000);
-          }
-          else if (pile_no == 3) {
-                  if (no_to_be_removed > marbles3.children.length || no_to_be_removed <= 0) {
+                  else if (pile_no == 2) {
+                        if (no_to_be_removed > marbles2.children.length - 1 || no_to_be_removed <= 0) {
                               alert("Invalid Input");
                               return;
+                        }
+                        for (i = 0; i < no_to_be_removed; i++) {
+                              var last_marble = marbles2.children[marbles2.children.length - 1];
+                              marbles2.removeChild(last_marble);
+                        }
+                        setTimeout(() => {
+                              if (check_game_over()) {
+                              alert("You win! Please collect your chocolate from the seniors :)");
+                              location.reload();
+                              }
+                        }, 500);
+                        document.getElementById("makemove").disabled = true;
+                        document.getElementById("makemove").innerHTML = "Waiting...";
+                        setTimeout(() => {
+                              comp_move();
+                              document.getElementById("makemove").disabled = false;
+                              document.getElementById("makemove").innerHTML = "Make Move";
+                        }, 1300);
                   }
-                for (i = 0; i < no_to_be_removed; i++) {
-                     var last_marble = marbles3.children[marbles3.children.length-1];
-                     marbles3.removeChild(last_marble);
-                 }
-                 if (check_game_over()) {
-                  alert("You win! Please collect your chocolate from the seniors :)");
-                  location.reload();
-                 }
-                 document.getElementById("makemove").disabled = true;
-                 document.getElementById("makemove").innerHTML = "Waiting...";
-                 setTimeout(() => {
-                  comp_move();
-                  document.getElementById("makemove").disabled = false;
-                  document.getElementById("makemove").innerHTML = "Make Move";
-                 }, 2000);
-          }
-          else {
-            alert("Invalid Input!");
-          }
-         }
-  
-         function reset() {
-             marbles1 = document.getElementById('marbles1');
-             var a = Math.floor(2 + Math.random() * (9 - 2));
-             while (marbles1.children.length < a) {
-                 new_img = document.createElement("img");
-                 new_img.setAttribute("src", "new_marble.png");
-                 new_img.setAttribute("height", "60px");
-                 new_img.setAttribute("width", "100px");
-                 new_img.style.transition = "all 2s";
-                 marbles1.appendChild(new_img)
-             }
-             var b = Math.floor(2 + Math.random() * (9 - 2));
-             marbles2 = document.getElementById('marbles2');
-             while (marbles2.children.length < b) {
-                 new_img = document.createElement("img");
-                 new_img.setAttribute("src", "new_marble.png");
-                 new_img.setAttribute("height", "60px");
-                 new_img.setAttribute("width", "100px");
-                 new_img.style.transition = "all 2s";
-                 marbles2.appendChild(new_img)
-             }
-  
-          //    set_button_states(true);
-          //    update_msg('\xA0');
-             var c = Math.floor(2 + Math.random() * (9 - 2));
-             marbles3 = document.getElementById('marbles3');
-             while (marbles3.children.length < c) {
-                 new_img = document.createElement("img");
-                 new_img.setAttribute("src", "new_marble.png");
-                 new_img.setAttribute("height", "60px");
-                 new_img.setAttribute("width", "100px");
-                 new_img.style.transition = "all 2s";
-                 marbles3.appendChild(new_img)
-             }
-  
-          //    set_button_states(true);
-          //    update_msg('\xA0');
-         }
-        </script>
-    </head>
-    <body onload="reset()" style="margin: 20px; background-color: black;">
-        <h1 style="margin-bottom: 25px; font-size: 7vh; font-family: 'Times New Roman', Times, serif; color: white;">Title</h1>
-        <div style="width:100%">
-            <div style="text-align: center; margin-bottom: 25px; letter-spacing: 1.1; font-size: 3vh; font-family: 'Times New Roman', Times, serif; color: white;">Take turns with the computer. On each turn, you may remove any number of marbles from any pile. Whoever takes the last marble loses, so choose carefully!</div>
+                  else if (pile_no == 3) {
+                        if (no_to_be_removed > marbles3.children.length - 1 || no_to_be_removed <= 0) {
+                              alert("Invalid Input");
+                              return;
+                        }
+                        for (i = 0; i < no_to_be_removed; i++) {
+                              var last_marble = marbles3.children[marbles3.children.length - 1];
+                              marbles3.removeChild(last_marble);
+                        }
+                        setTimeout(() => {
+                              if (check_game_over()) {
+                              alert("You win! Please collect your chocolate from the seniors :)");
+                              location.reload();
+                              }
+                        }, 500);
+                        document.getElementById("makemove").disabled = true;
+                        document.getElementById("makemove").innerHTML = "Waiting...";
+                        setTimeout(() => {
+                              comp_move();
+                              document.getElementById("makemove").disabled = false;
+                              document.getElementById("makemove").innerHTML = "Make Move";
+                        }, 1300);
+                  }
+                  else {
+                        alert("Invalid Input!");
+                  }
+            }
+
+            function reset() {
+                  marbles1 = document.getElementById('marbles1');
+                  var a = Math.floor(2 + Math.random() * (9 - 2));
+                  while (marbles1.children.length - 1 < a) {
+                        new_img = document.createElement("img");
+                        new_img.setAttribute("src", "new_marble.png");
+                        new_img.setAttribute("height", "60px");
+                        new_img.setAttribute("width", "100px");
+                        new_img.style.transition = "all 2s";
+                        marbles1.appendChild(new_img)
+                  }
+                  var b = Math.floor(2 + Math.random() * (9 - 2));
+                  marbles2 = document.getElementById('marbles2');
+                  while (marbles2.children.length - 1 < b) {
+                        new_img = document.createElement("img");
+                        new_img.setAttribute("src", "new_marble.png");
+                        new_img.setAttribute("height", "60px");
+                        new_img.setAttribute("width", "100px");
+                        new_img.style.transition = "all 2s";
+                        marbles2.appendChild(new_img)
+                  }
+                  var c = Math.floor(2 + Math.random() * (9 - 2));
+                  marbles3 = document.getElementById('marbles3');
+                  while (marbles3.children.length - 1 < c) {
+                        new_img = document.createElement("img");
+                        new_img.setAttribute("src", "new_marble.png");
+                        new_img.setAttribute("height", "60px");
+                        new_img.setAttribute("width", "100px");
+                        new_img.style.transition = "all 2s";
+                        marbles3.appendChild(new_img)
+                  }
+            }
+      </script>
+</head>
+
+<body onload="reset()" style="margin: 20px; background-color: black;">
+      <h1 style="text-align: center; margin-bottom: 25px; font-size: 7vh; font-family: 'Times New Roman', Times, serif; color: white;">Welcome to COPS
+      </h1>
+      <div style="width:100%">
+            <div
+                  style="letter-spacing: 1.0; margin-bottom: 25px;font-size: 3.2vh; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color: white;">
+                  Take turns with the computer in the following game! In a move, you may pick a non empty pile of marbles and remove any number of them from it. The player who can't make a move loses. The winner gets a reward!</div>
             <br /><br />
-            <div id="marbles1" style="margin-left: 100px; min-height:100px">
+            <div id="marbles1" style="margin-left: 100px; min-height:80px"><img src="one.jpg" alt="one" height="65px" width="65px" />
             </div>
-            <div id="marbles2" style="margin-left: 100px; min-height:100px">
+            <div id="marbles2" style="margin-left: 100px; min-height:80px"><img src="two.jpg" alt="one" height="65px" width="65px">
             </div>
-            <div id="marbles3" style="margin-left: 100px; min-height:100px">
+            <div id="marbles3" style="margin-left: 100px; min-height:80px"><img src="three.jpg" alt="one" height="65px" width="65px">
             </div>
-            <div id="moves" style="margin-top: 30px; text-align:center; color: white;">
-                <div style="font-size: 2.5vh; text-align:center; color: white;">Choose your move:</div>
-                <br /> 
-                <!-- <form> -->
-                      <input type="text" style="width:250px; height: 40px; border-radius: 5px; padding: 8px;" id="pileno" placeholder="Choose pile"/>
-                      <input type="text" style="width:250px; height: 40px; border-radius: 5px; padding: 8px;"  id="noofmarbles" placeholder="Choose number of marbles"/>
-                      <br /> <br />
-                      <button id="makemove" onclick="make_move()" class="btn btn-primary">Make Move</button>
-                <!-- </form> -->
+            <div id="moves" style="margin-top: 25px; text-align:center; color: white;">
+                  <div style="font-size: 2.5vh; text-align:center; color: white;">Choose your move:</div>
+                  <br />
+                  <input type="text" style="color: black; width:250px; height: 40px; border-radius: 5px; padding: 8px;" id="pileno"
+                        placeholder="Choose pile" />
+                  <input type="text" style="color: black; width:250px; height: 40px; border-radius: 5px; padding: 8px;"
+                        id="noofmarbles" placeholder="Choose number of marbles" />
+                  <br /> <br />
+                  <button id="makemove" onclick="make_move()" class="btn btn-primary">Make Move</button>
             </div>
             <div style="margin-top: 10px; text-align:center">
                   <button type="button" id="reset" onclick=location.reload() class="btn btn-primary">Reset</button>
             </div>
-            <div id="msg_box" style="font-weight: bold; text-align: center; margin-top: 30px">&nbsp;</div>
-        </div>
-    </body>
-  </html>
+            <div style="color: white; font-weight: bold; text-align: center; margin-top: 20px"></div>
+      </div>
+      <footer style="text-align: right; color: white; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+            Made by Bhav Khurana and Anshiv Singla (CSE Part 2)
+      </footer>
+</body>
+
+</html>
