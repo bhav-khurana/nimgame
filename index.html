@@ -1,21 +1,19 @@
 <html>
     <head>
-        <title>The Game of Nim</title>
-        <!-- <script type="text/javascript">
-         var _gaq = _gaq || [];
-  
-         _gaq.push(['_setAccount', 'UA-51812561-1']);
-         _gaq.push(['_trackPageview']);
-  
-         (function() {
-             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-         })();
-        </script> -->
-        <script type="text/javascript">
-  
+        <title>Ttile</title>
 
+        <script type="text/javascript">
+
+            function check_game_over() {
+                  var l1 = marbles1.children.length;
+                  var l2 = marbles2.children.length;
+                  var l3 = marbles3.children.length;
+                  if (!l1 && !l2 && !l3) {
+                        return true;
+                  }
+                  return false;
+            }
+  
          function comp_move() {
                 // algo
                 var nim_sum = 0;
@@ -29,21 +27,21 @@
                 if (nim_sum != 0){
                     if ((marbles1.children.length ^ nim_sum) < marbles1.children.length){
                         var no_to_be_removed=marbles1.children.length-(marbles1.children.length^nim_sum)
-                        for (i = 0; i < no_to_be_removed; i++) {
+                        for (let i = 0; i < no_to_be_removed; i++) {
                         var last_marble = marbles1.children[marbles1.children.length-1];
                         marbles1.removeChild(last_marble);
                         }
                     }
                     else if ((marbles2.children.length ^ nim_sum) < marbles2.children.length){
                         var no_to_be_removed=marbles2.children.length-(marbles2.children.length^nim_sum)
-                        for (i = 0; i < no_to_be_removed; i++) {
+                        for (let i = 0; i < no_to_be_removed; i++) {
                         var last_marble = marbles2.children[marbles2.children.length-1];
                         marbles2.removeChild(last_marble);
                         }
                     }
                     else if ((marbles3.children.length ^ nim_sum) < marbles3.children.length){
                         var no_to_be_removed=marbles3.children.length-(marbles3.children.length^nim_sum)
-                        for (i = 0; i < no_to_be_removed; i++) {
+                        for (let i = 0; i < no_to_be_removed; i++) {
                         var last_marble = marbles3.children[marbles3.children.length-1];
                         marbles3.removeChild(last_marble);
                         }
@@ -53,46 +51,37 @@
                 {
                     // Taking random number of stones out
                     if(marbles1.children.length>0){
-                        var no_to_be_removed=rand()%marbles1.children.length + 1;
-                        for (i = 0; i < no_to_be_removed; i++) {
+                        var no_to_be_removed=Math.floor(1 + Math.random() * (marbles1.children.length - 1))
+                        for (let i = 0; i < no_to_be_removed; i++) {
                         var last_marble = marbles1.children[marbles1.children.length-1];
                         marbles1.removeChild(last_marble);
                         }
                     }
                     else if(marbles2.children.length>0){
-                        var no_to_be_removed=rand()%marbles2.children.length + 1;
-                        for (i = 0; i < no_to_be_removed; i++) {
+                        var no_to_be_removed=Math.floor(1 + Math.random() * (marbles2.children.length - 1))
+                        for (let i = 0; i < no_to_be_removed; i++) {
                         var last_marble = marbles2.children[marbles2.children.length-1];
                         marbles2.removeChild(last_marble);
                         }
                     }
                     else if(marbles3.children.length>0){
-                        var no_to_be_removed=rand()%marbles3.children.length + 1;
-                        for (i = 0; i < no_to_be_removed; i++) {
+                        var no_to_be_removed=Math.floor(1 + Math.random() * (marbles3.children.length - 1))
+                        for (let i = 0; i < no_to_be_removed; i++) {
                         var last_marble = marbles3.children[marbles3.children.length-1];
                         marbles3.removeChild(last_marble);
                         }
                     }
                 }
+                setTimeout(() => {
+                  if (check_game_over()) {
+                        alert("You lose!  :(");
+                        location.reload();
+                 }
+                }, 500);
+                
          }
   
          function make_move() {
-          //    set_button_states(false);
-          //    update_msg('Thinking...');
-          //    setTimeout(function() {
-          //        marbles = document.getElementById('marbles');
-          //        num_to_take = (marbles.children.length - 1) % 4;
-          //        if (num_to_take == 0) {
-          //            num_to_take = 1;
-          //        }
-          //        update_msg('Taking ' + num_to_take + ' marble' + (num_to_take == 1 ? '' : 's'));
-          //        setTimeout(function() {
-          //            update_msg('\xA0');
-          //            remove_marbles(num_to_take, false);
-          //       //      set_button_states(true);
-          //        }, MOVE_DELAY);
-          //    }, THINK_DELAY);
-          console.log(document.getElementById('noofmarbles').value);
           var no_to_be_removed = parseInt(document.getElementById('noofmarbles').value);
           var pile_no = parseInt(document.getElementById('pileno').value);
             if (pile_no == 1) {
@@ -104,7 +93,17 @@
                      var last_marble = marbles1.children[marbles1.children.length-1];
                      marbles1.removeChild(last_marble);
                  }
-                 setTimeout(comp_move, 2000);
+                 if (check_game_over()) {
+                  alert("You win! Please collect your chocolate from the seniors :)");
+                  location.reload();
+                 }
+                 document.getElementById("makemove").disabled = true;
+                 document.getElementById("makemove").innerHTML = "Waiting...";
+                 setTimeout(() => {
+                  comp_move();
+                  document.getElementById("makemove").disabled = false;
+                  document.getElementById("makemove").innerHTML = "Make Move";
+                 }, 2000);
           }
           else if (pile_no == 2) {
                   if (no_to_be_removed > marbles2.children.length || no_to_be_removed <= 0) {
@@ -115,7 +114,17 @@
                      var last_marble = marbles2.children[marbles2.children.length-1];
                      marbles2.removeChild(last_marble);
                  }
-                 setTimeout(comp_move, 2000);
+                 if (check_game_over()) {
+                  alert("You win! Please collect your chocolate from the seniors :)");
+                  location.reload();
+                 }
+                 document.getElementById("makemove").disabled = true;
+                 document.getElementById("makemove").innerHTML = "Waiting...";
+                 setTimeout(() => {
+                  comp_move();
+                  document.getElementById("makemove").disabled = false;
+                  document.getElementById("makemove").innerHTML = "Make Move";
+                 }, 2000);
           }
           else if (pile_no == 3) {
                   if (no_to_be_removed > marbles3.children.length || no_to_be_removed <= 0) {
@@ -126,7 +135,17 @@
                      var last_marble = marbles3.children[marbles3.children.length-1];
                      marbles3.removeChild(last_marble);
                  }
-                 setTimeout(comp_move, 2000);
+                 if (check_game_over()) {
+                  alert("You win! Please collect your chocolate from the seniors :)");
+                  location.reload();
+                 }
+                 document.getElementById("makemove").disabled = true;
+                 document.getElementById("makemove").innerHTML = "Waiting...";
+                 setTimeout(() => {
+                  comp_move();
+                  document.getElementById("makemove").disabled = false;
+                  document.getElementById("makemove").innerHTML = "Make Move";
+                 }, 2000);
           }
           else {
             alert("Invalid Input!");
@@ -138,18 +157,20 @@
              var a = Math.floor(2 + Math.random() * (9 - 2));
              while (marbles1.children.length < a) {
                  new_img = document.createElement("img");
-                 new_img.setAttribute("src", "marble.png");
-                 new_img.setAttribute("height", "50px");
-                 new_img.setAttribute("width", "50px");
+                 new_img.setAttribute("src", "new_marble.png");
+                 new_img.setAttribute("height", "60px");
+                 new_img.setAttribute("width", "95px");
+                 new_img.style.transition = "all 2s";
                  marbles1.appendChild(new_img)
              }
              var b = Math.floor(2 + Math.random() * (9 - 2));
              marbles2 = document.getElementById('marbles2');
              while (marbles2.children.length < b) {
                  new_img = document.createElement("img");
-                 new_img.setAttribute("src", "marble.png");
-                 new_img.setAttribute("height", "50px");
-                 new_img.setAttribute("width", "50px");
+                 new_img.setAttribute("src", "new_marble.png");
+                 new_img.setAttribute("height", "60px");
+                 new_img.setAttribute("width", "95px");
+                 new_img.style.transition = "all 2s";
                  marbles2.appendChild(new_img)
              }
   
@@ -159,9 +180,10 @@
              marbles3 = document.getElementById('marbles3');
              while (marbles3.children.length < c) {
                  new_img = document.createElement("img");
-                 new_img.setAttribute("src", "marble.png");
-                 new_img.setAttribute("height", "50px");
-                 new_img.setAttribute("width", "50px");
+                 new_img.setAttribute("src", "new_marble.png");
+                 new_img.setAttribute("height", "60px");
+                 new_img.setAttribute("width", "95px");
+                 new_img.style.transition = "all 2s";
                  marbles3.appendChild(new_img)
              }
   
@@ -170,9 +192,9 @@
          }
         </script>
     </head>
-    <body onload="reset()" style="margin: 20px">
-        <h1>The Game of Nim</h1>
-        <div style="width:600px">
+    <body onload="reset()" style="margin: 20px; background-color: wheat;">
+        <h1>Title</h1>
+        <div style="width:100%">
             <div style="margin-bottom: 25px">Take turns with the computer. On each turn, you may remove any number of marbles from any pile. Whoever takes the last marble loses, so choose carefully!</div>
             <div id="marbles1" style="min-height:100px">
             </div>
@@ -182,15 +204,12 @@
             </div>
             <div id="moves" style="margin-top: 30px; text-align:center">
                 Choose your move:
-                <!-- <button type="button" id="button1" onclick="remove_marbles(1, true)">1 marble</button>
-                <button type="button" id="button2" onclick="remove_marbles(2, true)">2 marbles</button>
-                <button type="button" id="button3" onclick="remove_marbles(3, true)">3 marbles</button> -->
                 <br />
                 <!-- <form> -->
                       <input type="text" id="pileno" placeholder="Choose pile"/>
                       <input type="text" id="noofmarbles" placeholder="Choose number of marbles"/>
                       <br /> <br />
-                      <button onclick="make_move()">Make Move</button>
+                      <button id="makemove" onclick="make_move()">Make Move</button>
                 <!-- </form> -->
             </div>
             <div style="margin-top: 10px; text-align:center">
