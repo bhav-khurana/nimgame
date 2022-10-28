@@ -1,0 +1,158 @@
+
+<html>
+      <head>
+          <title>The Game of Nim</title>
+          <!-- <script type="text/javascript">
+           var _gaq = _gaq || [];
+    
+           _gaq.push(['_setAccount', 'UA-51812561-1']);
+           _gaq.push(['_trackPageview']);
+    
+           (function() {
+               var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+               ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+               var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+           })();
+          </script> -->
+          <script type="text/javascript">
+    
+
+      //      function comp_move() {
+      //             // algo
+      //             var nim_sum = 0;
+                  
+ 
+      //             // The player having the current turn is on a winning
+      //             // position. So he/she/it play optimally and tries to make
+      //             // Nim-Sum as 0
+      //             if (nim_sum != 0)
+      //             {
+      //                   for (i=0; i<n; i++)
+      //                   {
+      //                         // If this is not an illegal move
+      //                         // then make this move.
+      //                         if ((piles[i] ^ nim_sum) < piles[i])
+      //                         {
+      //                         (*moves).pile_index = i;
+      //                         (*moves).stones_removed =
+      //                                           piles[i]-(piles[i]^nim_sum);
+      //                         piles[i] = (piles[i] ^ nim_sum);
+      //                         break;
+      //                         }
+      //                   }
+      //             }
+      //      }
+    
+           function make_move() {
+            //    set_button_states(false);
+            //    update_msg('Thinking...');
+            //    setTimeout(function() {
+            //        marbles = document.getElementById('marbles');
+            //        num_to_take = (marbles.children.length - 1) % 4;
+            //        if (num_to_take == 0) {
+            //            num_to_take = 1;
+            //        }
+            //        update_msg('Taking ' + num_to_take + ' marble' + (num_to_take == 1 ? '' : 's'));
+            //        setTimeout(function() {
+            //            update_msg('\xA0');
+            //            remove_marbles(num_to_take, false);
+            //       //      set_button_states(true);
+            //        }, MOVE_DELAY);
+            //    }, THINK_DELAY);
+            console.log(document.getElementById('noofmarbles').value);
+            var no_to_be_removed = parseInt(document.getElementById('noofmarbles').value);
+            var pile_no = parseInt(document.getElementById('pileno').value);
+            if (pile_no == 0) {
+                  alert('Can\'t remove 0 marbles!');
+            }
+            else if (pile_no == 1) {
+                  for (i = 0; i < no_to_be_removed; i++) {
+                       var last_marble = marbles1.children[marbles1.children.length-1];
+                       marbles1.removeChild(last_marble);
+                   }
+                   comp_move();
+            }
+            else if (pile_no == 2) {
+                  for (i = 0; i < no_to_be_removed; i++) {
+                       var last_marble = marbles2.children[marbles2.children.length-1];
+                       marbles2.removeChild(last_marble);
+                   }
+                   comp_move();
+            }
+            else if (pile_no == 3) {
+                  for (i = 0; i < no_to_be_removed; i++) {
+                       var last_marble = marbles3.children[marbles3.children.length-1];
+                       marbles3.removeChild(last_marble);
+                   }
+                   comp_move();
+            }
+           }
+    
+           function reset() {
+               marbles1 = document.getElementById('marbles1');
+               var a = Math.floor(2 + Math.random() * (9 - 2));
+               while (marbles1.children.length < a) {
+                   new_img = document.createElement("img");
+                   new_img.setAttribute("src", "marble.png");
+                   new_img.setAttribute("height", "50px");
+                   new_img.setAttribute("width", "50px");
+                   marbles1.appendChild(new_img)
+               }
+               var b = Math.floor(2 + Math.random() * (9 - 2));
+               marbles2 = document.getElementById('marbles2');
+               while (marbles2.children.length < b) {
+                   new_img = document.createElement("img");
+                   new_img.setAttribute("src", "marble.png");
+                   new_img.setAttribute("height", "50px");
+                   new_img.setAttribute("width", "50px");
+                   marbles2.appendChild(new_img)
+               }
+    
+            //    set_button_states(true);
+            //    update_msg('\xA0');
+               var c = Math.floor(2 + Math.random() * (9 - 2));
+               marbles3 = document.getElementById('marbles3');
+               while (marbles3.children.length < c) {
+                   new_img = document.createElement("img");
+                   new_img.setAttribute("src", "marble.png");
+                   new_img.setAttribute("height", "50px");
+                   new_img.setAttribute("width", "50px");
+                   marbles3.appendChild(new_img)
+               }
+    
+            //    set_button_states(true);
+            //    update_msg('\xA0');
+           }
+          </script>
+      </head>
+      <body onload="reset()" style="margin: 20px">
+          <h1>The Game of Nim</h1>
+          <div style="width:600px">
+              <div style="margin-bottom: 25px">Take turns with the computer. On each turn, you may take 1, 2, or 3 marbles. Whoever takes the last marble loses, so choose carefully!</div>
+              <div id="marbles1" style="min-height:100px">
+              </div>
+              <div id="marbles2" style="min-height:100px">
+              </div>
+              <div id="marbles3" style="min-height:100px">
+              </div>
+              <div id="moves" style="margin-top: 30px; text-align:center">
+                  Choose your move:
+                  <!-- <button type="button" id="button1" onclick="remove_marbles(1, true)">1 marble</button>
+                  <button type="button" id="button2" onclick="remove_marbles(2, true)">2 marbles</button>
+                  <button type="button" id="button3" onclick="remove_marbles(3, true)">3 marbles</button> -->
+                  <br />
+                  <!-- <form> -->
+                        <input type="text" id="pileno" placeholder="Choose pile"/>
+                        <input type="text" id="noofmarbles" placeholder="Choose number of marbles"/>
+                        <br /> <br />
+                        <button onclick="make_move()">Make Move</button>
+                  <!-- </form> -->
+              </div>
+              <div style="margin-top: 10px; text-align:center">
+                  <button type="button" id="reset" onclick=location.reload()>Reset</button>
+              </div>
+              <div id="msg_box" style="font-weight: bold; text-align: center; margin-top: 30px">&nbsp;</div>
+          </div>
+      </body>
+    </html>
+    
