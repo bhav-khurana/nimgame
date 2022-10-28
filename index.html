@@ -137,7 +137,7 @@
                         }
                         setTimeout(() => {
                               if (check_game_over()) {
-                              alert("You win! Please collect your chocolate from the seniors :)");
+                              alert("You win!");
                               location.reload();
                               }
                         }, 500);
@@ -194,7 +194,7 @@
       </h1>
       <div style="width:100%">
             <div
-                  style="letter-spacing: 1.0; margin-bottom: 25px;font-size: 3.2vh; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color: white;">
+                  style="margin-bottom: 25px;font-size: 3.2vh; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color: white;">
                   Take turns with the computer in the following game! In a move, you may pick a non empty pile of marbles and remove any number of them from it. The player who can't make a move loses. The winner gets a reward!</div>
             <br /><br />
             <div id="marbles1" style="margin-left: 100px; min-height:80px"><img src="one.jpg" alt="one" height="65px" width="65px" />
@@ -204,12 +204,12 @@
             <div id="marbles3" style="margin-left: 100px; min-height:80px"><img src="three.jpg" alt="one" height="65px" width="65px">
             </div>
             <div id="moves" style="margin-top: 25px; text-align:center; color: white;">
-                  <div style="font-size: 2.5vh; text-align:center; color: white;">Choose your move:</div>
+                  <!-- <div style="font-size: 2.5vh; text-align:center; color: white;">Choose your move:</div> -->
                   <br />
                   <input type="text" style="color: black; width:250px; height: 40px; border-radius: 5px; padding: 8px;" id="pileno"
                         placeholder="Choose pile" />
                   <input type="text" style="color: black; width:250px; height: 40px; border-radius: 5px; padding: 8px;"
-                        id="noofmarbles" placeholder="Choose number of marbles" />
+                        id="noofmarbles" placeholder="Number of marbles" />
                   <br /> <br />
                   <button id="makemove" onclick="make_move()" class="btn btn-primary">Make Move</button>
             </div>
